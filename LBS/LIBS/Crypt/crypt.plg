@@ -1,0 +1,91 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: AppMngr - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F17.tmp" with contents
+[
+/nologo /Zp4 /MTd /W3 /GX /Z7 /Od /I "." /I "k:\develop\include" /D "_WINDOWS" /D "WIN32" /D "_DEBUG" /FR"\obj\appmngr\debug/" /Fp"\obj\appmngr\debug/AppMngr.pch" /YX /Fo"\obj\appmngr\debug/" /Fd"\obj\appmngr\debug/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\APPMNG1.CPP"
+"D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\AppMngcl.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F17.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\..\lib\debug\AppMngr.lib"  \obj\appmngr\debug\APPMNG1.OBJ \obj\appmngr\debug\AppMngcl.obj "
+<h3>Output Window</h3>
+Compiling...
+APPMNG1.CPP
+Instrumentation of D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\APPMNG1.CPP starting...
+Instrumentation of D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\APPMNG1.CPP done.
+AppMngcl.cpp
+Instrumentation of D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\AppMngcl.cpp starting...
+Instrumentation of D:\DEVTREE_SHARE\devvlad\LBW\Libs\AppMngr\AppMngcl.cpp done.
+Creating library...
+<h3>
+--------------------Configuration: Comparator - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F19.tmp" with contents
+[
+/nologo /Zp4 /MTd /W3 /GX /Z7 /Od /I "." /I "..\..\..\include" /I "k:\develop\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR"\obj\comparator\debug/" /Fp"\obj\comparator\debug/Comparator.pch" /YX /Fo"\obj\comparator\debug/" /Fd"\obj\comparator\debug/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Comparator\Comparator.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F19.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\..\lib\debug\Comparator.lib"  \obj\comparator\debug\Comparator.obj \DEVTREE_SHARE\devvlad\lib\debug\AppMngr.lib "
+<h3>Output Window</h3>
+Compiling...
+Comparator.cpp
+Instrumentation of D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Comparator\Comparator.cpp starting...
+Instrumentation of D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Comparator\Comparator.cpp done.
+Creating library...
+Creating temporary file "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1B.bat" with contents
+[
+@echo off
+call CopyFiles L D \DEVTREE_SHARE\devvlad\lib\debug\Comparator.lib
+echo ok.
+]
+Creating command line "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1B.bat"
+Copiando arquivos...
+Arquivo(s) nao copiado(s) para o K.
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+<h3>
+--------------------Configuration: crypt - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1C.tmp" with contents
+[
+/nologo /Zp4 /MTd /W3 /GX /Z7 /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fp"\obj\crypt\debug/crypt.pch" /YX /Fo"\obj\crypt\debug/" /Fd"\obj\crypt\debug/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Crypt\crypt.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1C.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\..\lib\debug\crypt.lib"  \obj\crypt\debug\crypt.obj \DEVTREE_SHARE\devvlad\lib\debug\Comparator.lib "
+<h3>Output Window</h3>
+Compiling...
+crypt.c
+Instrumentation of D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Crypt\crypt.c starting...
+Instrumentation of D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Crypt\crypt.c done.
+Creating library...
+Creating temporary file "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1E.bat" with contents
+[
+@echo off
+call CopyFiles L D \DEVTREE_SHARE\devvlad\lib\debug\crypt.lib
+echo ok.
+]
+Creating command line "C:\DOCUME~1\vladimir\CONFIG~1\Temp\RSP9F1E.bat"
+Copiando arquivos...
+Arquivo(s) nao copiado(s) para o K.
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+
+
+
+<h3>Results</h3>
+crypt.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

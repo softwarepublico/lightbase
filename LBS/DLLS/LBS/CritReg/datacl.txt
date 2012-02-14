@@ -1,0 +1,21 @@
+
+Regiões Críticas para a Classe Data
+-------------------------------------
+
+
+RC1
+---
+Atributo		Métodos onde aparece
+--------------------------------------------
+OwnerField		embutida nas macros SETFIELDUPDATE
+				e DUPUNIQUEKEY,
+				LBSC_Data, IsPermOk, SetError
+pbSlot			SetSlot
+iSlotSize		SetSlot
+
+RC2
+---
+Atributo		Métodos onde aparece
+--------------------------------------------
+DataSize		ModifyData, operator =
+Data			~LBSC_Data, ModifyData, operator =

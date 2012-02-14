@@ -1,0 +1,21 @@
+SCC = This is a Source Code Control file
+
+[crypt.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/Crypt", STMBAAAA
+
+[crypt.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/Crypt", STMBAAAA
+
+[crypt.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/Crypt", STMBAAAA
+
+[crypt.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/Crypt", STMBAAAA
+
+[crypt.vcproj]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/Crypt", STMBAAAA

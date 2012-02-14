@@ -1,0 +1,21 @@
+SCC = This is a Source Code Control file
+
+[persdll.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/persdll", WNMBAAAA
+
+[persdll.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/persdll", WNMBAAAA
+
+[persdll.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/persdll", WNMBAAAA
+
+[persdll.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/persdll", WNMBAAAA
+
+[persdll.vcproj]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/persdll", WNMBAAAA

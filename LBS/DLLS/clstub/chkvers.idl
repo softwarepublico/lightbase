@@ -1,0 +1,13 @@
+[ uuid (98f1c230-9eb3-11d3-91ad-006097d328e5),
+  version(1.1),
+  pointer_default(unique)
+]
+
+interface chkvers
+{
+[ string ] char *
+RPC_MustReinstall( void );
+[ string ] char *
+RPC_GetMinClientVersion( void );
+}
+

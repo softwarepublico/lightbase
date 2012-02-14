@@ -1,0 +1,85 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: rpcstuff - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP286.tmp" with contents
+[
+/nologo /Zp4 /MTd /W3 /GX /Z7 /Od /I "." /I ".\include" /I "k:\develop\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Fp"\obj\rpcstuff\debug/rpcstuff.pch" /YX /Fo"\obj\rpcstuff\debug/" /Fd"\obj\rpcstuff\debug/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\critsect.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\encript.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\fbuff.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\rpcserial1.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\rpcserial2.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\rpcserial3.cpp"
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\rpcstuff\source\rpcserial4.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP286.tmp" 
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP287.tmp" with contents
+[
+/nologo /out:"..\..\..\lib\Debug\rpcstuff.lib" 
+\obj\rpcstuff\debug\critsect.obj
+\obj\rpcstuff\debug\encript.obj
+\obj\rpcstuff\debug\fbuff.obj
+\obj\rpcstuff\debug\rpcserial1.obj
+\obj\rpcstuff\debug\rpcserial2.obj
+\obj\rpcstuff\debug\rpcserial3.obj
+\obj\rpcstuff\debug\rpcserial4.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP287.tmp"
+<h3>Output Window</h3>
+Compiling...
+critsect.cpp
+encript.cpp
+k:\develop\include\aldefs.h(296) : warning C4005: 'STRICT' : macro redefinition
+        C:\ARQUIVOS DE PROGRAMAS\MICROSOFT VISUAL STUDIO\VC98\INCLUDE\windef.h(15) : see previous definition of 'STRICT'
+k:\develop\include\status.h(123) : warning C4183: 'GetStatusCode': member function definition looks like a ctor, but name does not match enclosing class
+fbuff.cpp
+.\include\lbsrpc.h(40) : warning C4005: 'USERNAMESIZE' : macro redefinition
+        k:\develop\include\userdefs.h(96) : see previous definition of 'USERNAMESIZE'
+.\include\lbsrpc.h(42) : warning C4005: 'DESCRIPTIONSIZE' : macro redefinition
+        k:\develop\include\userdefs.h(98) : see previous definition of 'DESCRIPTIONSIZE'
+.\include\lbsrpc.h(44) : warning C4005: 'PASSWORDSIZE' : macro redefinition
+        k:\develop\include\userdefs.h(99) : see previous definition of 'PASSWORDSIZE'
+.\include\lbsrpc.h(46) : warning C4005: 'FULLNAMESIZE' : macro redefinition
+        k:\develop\include\lbsdefs.h(54) : see previous definition of 'FULLNAMESIZE'
+.\include\lbsrpc.h(48) : warning C4005: 'GROUPNAMESIZE' : macro redefinition
+        k:\develop\include\userdefs.h(97) : see previous definition of 'GROUPNAMESIZE'
+.\include\lbsrpc.h(50) : warning C4005: 'SERVERNAMESIZE' : macro redefinition
+        k:\develop\include\lbsdefs.h(55) : see previous definition of 'SERVERNAMESIZE'
+.\include\lbsrpc.h(52) : warning C4005: 'SERIALNUMBERSIZE' : macro redefinition
+        k:\develop\include\lbsdefs.h(56) : see previous definition of 'SERIALNUMBERSIZE'
+.\include\lbsrpc.h(54) : warning C4005: 'FIELDNAMESIZE' : macro redefinition
+        k:\develop\include\lbsdefs.h(66) : see previous definition of 'FIELDNAMESIZE'
+.\include\lbsrpc.h(56) : warning C4005: 'ADDRESSSIZE' : macro redefinition
+        k:\develop\include\userdefs.h(100) : see previous definition of 'ADDRESSSIZE'
+.\include\lbsrpc.h(58) : warning C4005: 'PHONESIZE' : macro redefinition
+        k:\develop\include\userdefs.h(101) : see previous definition of 'PHONESIZE'
+rpcserial1.cpp
+rpcserial2.cpp
+rpcserial3.cpp
+rpcserial4.cpp
+Creating library...
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP288.bat" with contents
+[
+@echo off
+call CopyFiles L D \DEVTREE_SHARE\devvlad\lib\Debug\rpcstuff.lib
+echo ok.
+]
+Creating command line "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP288.bat"
+Copiando arquivos...
+Arquivo(s) nao copiado(s) para o K.
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+
+
+
+<h3>Results</h3>
+rpcstuff.lib - 0 error(s), 12 warning(s)
+</pre>
+</body>
+</html>

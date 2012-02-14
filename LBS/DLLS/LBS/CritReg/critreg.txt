@@ -1,0 +1,37 @@
+Regiões Críticas para a Classe Base
+-----------------------------------
+
+
+RC11
+----
+Atributo		Métodos onde aparece
+--------------------------------------------
+contadores		PutCount, GetCount, IncCount
+				DecCount, GetNextCount, GetPreviousCount
+
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+				AppendRecord
+
+RC13		-> regiao critica para proteger as operacoes de atualizacao,
+---------	   leitura, criacao e delecao de registro e a operacao de log. Nao 
+			   trabalha sobre um membro especifico da classe.
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+_szLogFileName		PrintLogUse, GetLogFileName
+_iMaxLogUseFileSize	PrintLogUse, GetLogFileName
+			UpdateRecord, ReadRecord, DeleteRecord
+				
+
+RC14		-> regiao critica para proteger a lista de locks pendurados
+---------	   
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+_clBaseTimersList 	StartLBS
+			LockTimerProc
+			AddLockInfo
+			DelLockInfo
+

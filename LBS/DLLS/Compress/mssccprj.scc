@@ -1,0 +1,21 @@
+SCC = This is a Source Code Control file
+
+[compress.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/Compress", MAMBAAAA
+
+[compress.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/Compress", MAMBAAAA
+
+[compress.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/Compress", MAMBAAAA
+
+[compress.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/Compress", MAMBAAAA
+
+[compress.vcproj]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/Compress", MAMBAAAA

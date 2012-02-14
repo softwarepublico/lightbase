@@ -1,0 +1,108 @@
+--------------------Configuration: clstub - Win32 Debug--------------------
+Begining build with project "E:\devvlad\LBS\DLLS\clstub\clstub.dsp", at root.
+Active configuration is Win32 (x86) Dynamic-Link Library (based on Win32 (x86) Dynamic-Link Library)
+
+Project's tools are:
+			"32-bit C/C++ Compiler for 80x86" with flags "/nologo /Zp4 /MTd /W3 /Gm /Zi /Od /I ".\include" /I "k:\develop\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "BUILDING_LBS_DLL" /D "__NOMFC" /D "_TESTE" /Fp"\obj\clstub\Debug/clstub.pch" /YX /Fo"\obj\clstub\Debug/" /Fd"\obj\clstub\Debug/" /FD /c "
+			"OLE Type Library Maker" with flags "/nologo /D "_DEBUG" /mktyplib203 /win32 "
+			"Win32 Resource Compiler" with flags "/l 0x416 /fo"\obj\clstub\Debug/clstub.res" /d "_DEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"..\..\..\lib\Debug\dce/clstub.bsc" "
+			"COFF Linker for 80x86" with flags "wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib alfc.lib appmngr.lib li.lib lifile.lib crypt.lib rpcstuff.lib lbstart.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"..\..\..\lib\Debug\dce/lbs.pdb" /debug /machine:I386 /nodefaultlib:"libcimt.lib" /out:"..\..\..\Debug\dce\lbs.dll" /implib:"..\..\..\lib\Debug\dce/lbs.lib" /libpath:"k:\develop\lib\debug\newdbg" /libpath:"k:\develop\lib\debug" /libpath:"k:\develop\lib\release" "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\TEMP\RSP11B.tmp" with contents </nologo /Zp4 /MTd /W3 /Gm /Zi /Od /I ".\include" /I "k:\develop\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "BUILDING_LBS_DLL" /D "__NOMFC" /D "_TESTE" /Fp"\obj\clstub\Debug/clstub.pch" /YX /Fo"\obj\clstub\Debug/" /Fd"\obj\clstub\Debug/" /FD /c 
+"E:\devvlad\LBS\DLLS\clstub\Source\basecache.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\cldata.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\CLLBSERR.CPP"
+"E:\devvlad\LBS\DLLS\clstub\Source\clntfuncs.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\cloccurr.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\clsess1.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\clsess2.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\getsrvrs.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\lbsnetcl.cpp"
+"E:\devvlad\LBS\DLLS\clstub\Source\opinfocl.cpp"
+>
+Creating command line "cl.exe @C:\TEMP\RSP11B.tmp" 
+Creating temp file "C:\TEMP\RSP11C.tmp" with contents <wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib alfc.lib appmngr.lib li.lib lifile.lib crypt.lib rpcstuff.lib lbstart.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"..\..\..\lib\Debug\dce/lbs.pdb" /debug /machine:I386 /nodefaultlib:"libcimt.lib" /out:"..\..\..\Debug\dce\lbs.dll" /implib:"..\..\..\lib\Debug\dce/lbs.lib" /libpath:"k:\develop\lib\debug\newdbg" /libpath:"k:\develop\lib\debug" /libpath:"k:\develop\lib\release" 
+\obj\clstub\Debug\basecache.obj
+\obj\clstub\Debug\chkvers_c.obj
+\obj\clstub\Debug\clbase1.obj
+\obj\clstub\Debug\clbase2.obj
+\obj\clstub\Debug\clbase3.obj
+\obj\clstub\Debug\clbase4.obj
+\obj\clstub\Debug\clbase5.obj
+\obj\clstub\Debug\cldata.obj
+\obj\clstub\Debug\clfield.obj
+\obj\clstub\Debug\CLIENT.OBJ
+\obj\clstub\Debug\CLLBSERR.OBJ
+\obj\clstub\Debug\clntfuncs.obj
+\obj\clstub\Debug\cloccurr.obj
+\obj\clstub\Debug\clsess1.obj
+\obj\clstub\Debug\clsess2.obj
+\obj\clstub\Debug\getsrvrs.obj
+\obj\clstub\Debug\lbsnetcl.obj
+\obj\clstub\Debug\lbsrpc_c.obj
+\obj\clstub\Debug\opinfocl.obj
+\obj\clstub\Debug\clstub.res>
+Creating command line "link.exe @C:\TEMP\RSP11C.tmp" 
+Compiling...
+basecache.cpp
+k:\develop\include\lbsrpc.h(38) : warning C4005: 'USERNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(40) : warning C4005: 'DESCRIPTIONSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(42) : warning C4005: 'PASSWORDSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(44) : warning C4005: 'FULLNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(46) : warning C4005: 'GROUPNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(48) : warning C4005: 'SERVERNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(50) : warning C4005: 'SERIALNUMBERSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(52) : warning C4005: 'FIELDNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(54) : warning C4005: 'ADDRESSSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(56) : warning C4005: 'PHONESIZE' : macro redefinition
+.\include\sesscl.h(197) : warning C4190: 'GetInstalInfo' has C-linkage specified, but returns UDT '_sInstalInfo' which is incompatible with C
+clsess2.cpp
+k:\develop\include\lbsrpc.h(38) : warning C4005: 'USERNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(40) : warning C4005: 'DESCRIPTIONSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(42) : warning C4005: 'PASSWORDSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(44) : warning C4005: 'FULLNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(46) : warning C4005: 'GROUPNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(48) : warning C4005: 'SERVERNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(50) : warning C4005: 'SERIALNUMBERSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(52) : warning C4005: 'FIELDNAMESIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(54) : warning C4005: 'ADDRESSSIZE' : macro redefinition
+k:\develop\include\lbsrpc.h(56) : warning C4005: 'PHONESIZE' : macro redefinition
+.\include\sesscl.h(197) : warning C4190: 'GetInstalInfo' has C-linkage specified, but returns UDT '_sInstalInfo' which is incompatible with C
+Skipping... (no relevant changes detected)
+cldata.cpp
+CLLBSERR.CPP
+clntfuncs.cpp
+cloccurr.cpp
+clsess1.cpp
+getsrvrs.cpp
+lbsnetcl.cpp
+opinfocl.cpp
+Linking...
+   Creating library ..\..\..\lib\Debug\dce/lbs.lib and object ..\..\..\lib\Debug\dce/lbs.exp
+LINK : warning LNK4098: defaultlib "LIBCMT" conflicts with use of other libs; use /NODEFAULTLIB:library
+LIBCMTD.lib(crt0init.obj) : warning LNK4098: defaultlib "libc.lib" conflicts with use of other libs; use /NODEFAULTLIB:library
+Creating temp file "C:\TEMP\RSP11D.bat" with contents <@echo off
+call CopyFiles L D .\..\..\..\lib\Debug\dce\lbs.lib
+call CopyFiles D       D     \devvlad\Debug\dce\lbs.dll
+call CopyFiles I D .\Lang\Port\*.Ini Lang\Port
+call CopyFiles I D .\Lang\Engl\*.Ini Lang\Engl
+echo ok.
+>
+Creating command line "C:\TEMP\RSP11D.bat" 
+Copiando arquivos...
+Arquivo(s) nao copiado(s) para o K.
+Data e hora atuais: 12/07/99, 18:22:21
+Arquivo(s) nao copiado(s) para o K.
+Data e hora atuais: 12/07/99, 18:22:21
+Arquivo(s) nao copiado(s) para o K.
+Data e hora atuais: 12/07/99, 18:22:21
+Arquivo(s) nao copiado(s) para o K.
+Data e hora atuais: 12/07/99, 18:22:21
+ok.
+
+
+
+lbs.dll - 0 error(s), 24 warning(s)

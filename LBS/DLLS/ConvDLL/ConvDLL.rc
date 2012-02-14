@@ -1,0 +1,197 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\ConvDLL.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,14,0,0
+ PRODUCTVERSION 3,2,12,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "CONVDLL DLL\0"
+            VALUE "FileVersion", "1, 14, 0, 0\0"
+            VALUE "InternalName", "CONVDLL\0"
+            VALUE "LegalCopyright", "Copyright © 1996\0"
+            VALUE "OriginalFilename", "CONVDLL.DLL\0"
+            VALUE "ProductName", "CONVDLL Dynamic Link Library\0"
+            VALUE "ProductVersion", "3, 2, 12, 0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FEEDBACKDLG DIALOG DISCARDABLE  0, 0, 184, 36
+STYLE WS_POPUP | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "texto",IDC_MSGSTATIC,7,7,170,8
+    CONTROL         "Custom1",IDC_PROGRESS,"LIProgressBar",WS_TABSTOP,7,19,
+                    170,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_FEEDBACKDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 177
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 29
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_MSG_CONVERTINGBASE  "Convertendo %1..."
+    CONVM_OK                "Conversão realizada com sucesso."
+    CONVEM_CONTROLNOTFOUND  "Arquivo de controle não foi encontrado."
+    CONVEM_CONTROLCONVERROR "Erro durante a conversão do arquivo de controle (%1)."
+    CONVEM_CONTROLOPENERROR "Erro na abertura do arquivo de controle (%1)."
+    CONVEM_ERRCONV          "Erro durante a conversão da base %1."
+    CONVEM_UNKNOWNBASEVERSION 
+                            "A base indicada para conversão possui uma versão desconhecida por esta aplicação."
+    CONVEM_NOBASESTOCONV    "Nenhuma base foi encontrada."
+    CONVEM_FILEREADERR      "Erro de leitura na base %1."
+    CONVEM_NOTTEMPPATH      "Não consegui obter um diretório temporário para trabalhar."
+    CONVEM_NOTNEWPATH       "Não consegui criar um diretório novo para trabalhar."
+    CONVEM_NOTCREATED       "Não consegui criar um arquivo para a conversão da base %1."
+    CONVEM_ALLOCERR         "Erro de alocação de memória."
+    CONVEM_FILEIOERR        "Erro de E/S durante a conversão da base %1."
+    CONVEM_FATALERR         "Erro fatal."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    CONVEM_FILERENERR       "Não consegui renomear os arquivos."
+    CONVEM_FILEMOVEERR      "Não consegui mover os arquivos."
+    CONVEM_FILECREATERR     "Erro durante criação de arquivo. Verifique se há espaço disponível em disco."
+    IDS_MSG_CONVERTINGCONTROLFILE "Convertendo arquivo de controle."
+    CONVEM_FILEOPENERR      "Erro de abertura de arquivo."
+    IDS_MSG_UPDATINGCONTROLFILE "Atualizando o arquivo de controle."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\ConvDLL.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

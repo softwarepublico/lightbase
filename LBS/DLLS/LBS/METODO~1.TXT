@@ -1,0 +1,157 @@
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+		BASE
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+		int			LockRecord( const LBSC_Ticket *, BOOL = FALSE );
+		int			ReleaseRecord( const LBSC_Ticket * );
+		int			UpdateRecord( const LBSC_Ticket * );
+		int			AppendRecord( const LBSC_Ticket * );
+		int			DeleteRecord( const LBSC_Ticket * );
+
+		// $$$ tratamento de LO's
+		long			GetNumOccurrences( const LBSC_Ticket * );
+		long			GetNumOLRecords( const LBSC_Ticket *, int );
+		int				*Search( const LBSC_Ticket *, char * );
+		int				SaveOcList( const LBSC_Ticket *, int, char * );
+		int				LoadOcList( const LBSC_Ticket *, char * );
+		int				SortOcList( const LBSC_Ticket *, int, char *, BOOL = FALSE );
+		int				EnableOcList( const LBSC_Ticket *, int );
+		char			*GetCurrentExpression( const LBSC_Ticket * );
+		char			*GetOcListExpression( const LBSC_Ticket *, int );
+		long			GetOLRecNumber( const LBSC_Ticket * );
+		int				UnloadOcList( const LBSC_Ticket *, int );
+		int				DeleteOcList( const LBSC_Ticket *, char * );
+		int				DeleteOcRecords( const LBSC_Ticket * );
+		int				EnableSecureSort( BOOL );
+		BOOL			SecureSortStatus();
+
+
+		// $$$ Metodos para tratamento de StopWords
+		int				AddStopWord( const LBSC_Ticket *, char * );
+		char			*GetStopWords( const LBSC_Ticket * );
+		int				DelStopWord( const LBSC_Ticket *, char * );
+		const char		*GetCurrentStopWord( const LBSC_Ticket * );
+		const char		*GetFirstStopWord( const LBSC_Ticket * );
+		const char		*GetLastStopWord( const LBSC_Ticket * );
+		const char		*GetNextStopWord( const LBSC_Ticket * );
+		const char		*GetPreviousStopWord( const LBSC_Ticket * );
+		const char		*GetNthStopWord( const LBSC_Ticket *, int );
+		const char		*SearchStopWord( const LBSC_Ticket *, const char *, int );
+		long			GetNumberOfStopWords( const LBSC_Ticket * );
+
+		// $$$ Metodos para tratamento de GoWords
+		int				AddGoWord( UINT, char * );
+		int				DelGoWord( UINT, char * );
+
+		// $$$ Metodos para tratamento de ACL's
+		int				SetACLPerm( char *, long, BYTE, int );
+		int				GetACLPerm( char *, long, int );
+		int				DelACLPerm( char *, long, int );
+		LBSC_PermList 	*GetACLListPermission( char *, int );
+
+		// $$$ Metodos para tratamento de indexacao
+		BOOL			GetStopIndex();
+		void			SetStopIndex( BOOL );
+		int				EnableOnLineIndex( BOOL );
+		BOOL			OnLineIndexStatus();
+		int				UpdateIndex( const LBSC_Ticket * );
+		int				IndexAll( const LBSC_Ticket *, BOOL = FALSE  );
+		int				IndexString( const LBSC_Ticket *, long, UINT, int, char * );
+		int				UnindexString( const LBSC_Ticket *, long, UINT, int, char * );
+		int				GetNumRecIndex();	// numero de registros que sao indexados
+								// incrementalmente de cada vez
+
+		// $$$ Metodos que precisamos repassar da API LIght Text
+		// $$$ para a aplicacao LBS
+		char			*ExchangeOperator( char * );
+		int				SetMask( char *, int );
+		char			*GetMask( int );
+		int				SaveMasks( char * );
+		int				LoadMasks( char * );
+		int				ClearMasks();
+		int				AddPhone( char *, int );
+		int				DeletePhone( char * );
+		int				SavePhone( char * );
+		int				LoadPhone( char * );
+		int				ClearPhone();
+		int				FindPhone( char *, char * );
+		char			*SetStandardizer( char * );
+		char			*GetStandardizer();
+		int				Standardize( char *, char *, int );
+		int				AddSynonym( char *, char *, int );
+		int				DeleteSynonym( char *, char *, int );
+		int				SaveSynonym( char * );
+		int				LoadSynonym( char * );
+		int				ClearSynonym();
+		char			*FindSynonym( char * );
+		int				OLAnd( const LBSC_Ticket *, int, int );
+		int				OLOr( const LBSC_Ticket *, int, int );
+		int				OLXor( const LBSC_Ticket *, int, int );
+		int				OLNot( const LBSC_Ticket *, int, int );
+
+		// $$$ Setar navegacao por um indice
+		int				SetNavigationByIndex( const LBSC_Ticket *, BOOL, UINT uiFieldId = 0, int iIndex = 0, int iType = EQUAL_KEY );
+
+		// $$$ Setar navegacao por uma chave
+		int				SetNavigationByKey( const LBSC_Ticket *, BOOL, UINT uiFieldId = 0, int iIndex = 0, char *szNavKey = NULL, int iType = EQUAL_KEY );
+
+		// $$$ posicionar-se sobre o primeiro registro de uma chave
+		int				Locate( const LBSC_Ticket *, UINT, int, char *, int iType = EQUAL_KEY );
+
+		// $$$ Metodos para tratamento de SLOTs
+		int				GetNumberOfSlots();
+		int				GetSlot( int, void * );
+		long			GetSlotSize( int );
+		int				PutSlot( int, void *, int );
+		int				GetFieldSlot( UINT, void * );
+		long			GetFieldSlotSize( UINT );
+		int				PutFieldSlot( UINT, void *, int );
+
+		// Metodos para tratamento de contadores
+		int				GetNumberOfCounters();
+		long			GetCount( int );
+		int				PutCount( int, long );
+		int				IncCount( int, long = 1 );
+		int				DecCount( int, long = 1 );
+		long			GetNextCount( int );
+		long			GetPreviousCount( int );
+
+		// $$$ Metodos de uso geral
+		int				Compare( LBSC_Base *, int );
+		LBSC_Base		*Duplicate( void );
+		int				ModifyBaseOwnerName( const LBSC_Ticket *, char *, char * );
+		int				ModifyPassword( const LBSC_Ticket *, char *, char * );
+		int				ModifyMaintenancePassword( const LBSC_Ticket *, char *, char * );
+		int				ModifyRecordPassword( const LBSC_Ticket *, char *, char * );
+		int				BlockReExport( const LBSC_Ticket * );
+		BOOL			IsExportable();
+		char			*GetUserBase();
+		char			*GetOwnerName();
+		int				GetFullBaseName( char * );
+		int				GetBaseName( char * );
+		int				GetBaseLongName( char * );
+		BOOL			IsEncrypt();
+		BOOL			IsFullAccess();
+		BYTE			GetBaseType();
+		int				ModifyBaseType( BYTE );
+		int				ModifyBaseName( char *szNewBaseName );
+		BOOL			IndexSystemOk();
+		BOOL			IsExclusive();
+		BOOL			IsReadOnly();
+		BOOL			Flush( const LBSC_Ticket * );
+		int				ModifyMaxKeySize( const LBSC_Ticket *, int );
+		TBaseInfo		*GetBaseInfo( const LBSC_Ticket * );
+		int				ClearBase( const LBSC_Ticket * );
+		LBSC_Session	*GetOwnerSession();
+
+		// metodos para feedback
+		void						CancelOperation();
+		void						GetOpInfo( char *, float * );
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+		SESSAO
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////

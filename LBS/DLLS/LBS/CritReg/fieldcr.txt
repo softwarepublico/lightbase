@@ -1,0 +1,42 @@
+
+Regiões Críticas para a Classe Field
+-------------------------------------
+
+
+RC1
+---
+Atributo		Métodos onde aparece
+--------------------------------------------
+Base			Operator =
+FieldOrigName	Operator =
+FieldType		Operator =
+Error			Operator =
+
+RC2
+---
+Atributo		Métodos onde aparece
+--------------------------------------------
+AliasName			Operator =, ModifyAliasName
+FieldDescription	Operator =, ModifyDescription
+FieldId				Operator =, SetId, Init
+Password			Operator =, ModifyPassword, GetPassword
+FieldSize			Operator =, ModifySize, Init
+IndexAttrib			Operator =, SetAttrib, Init
+FlagStructUpdate	Operator =, ModifyPassword, ModifyAliasName,
+					ModifyDescription, ModifySize, Init
+
+RC3
+---
+Atributo		Métodos onde aparece
+--------------------------------------------
+FlagUpdate		Init, Clear, AddRepetition, ModifyRepByIndex.
+				DelRepByIndex, Operator <<, operator =
+GoWord			AddGoWord, DelGoWord, ~LBSC_Field
+DataList		Clear, AddRepetition
+RepetFilePos	Init
+lbscdlDataList	Clear, GetNumberOfRepetition, GetRepetitionByIndex,
+				GetConstRepByIndex, GetRepetitionByVal,
+				AddRepetition, ModifyRepetitionByIndex,
+				DeleteRepetitionByIndex, operator [], operator =,
+				operator <<, ClearAllDataSlots
+

@@ -1,0 +1,77 @@
+Cara, mandei isso via mail, mas voltou.
+
+
+	Aí vão as dicas de como utilizar a classe de lista contida em li.lib.
+
+. existe uma classe chamada C_List, que trabalha com void * (arquivo listcl.h)
+
+. existem duas classes, chamadas C_DList e C_SList, que trabalham sobre
+  template e representam listas duplamente encadeadas e simplesmente
+  encadeadas, respectivamente (arquivo lbstempl.h)
+
+. para construir uma lista de uma determinada estrutura ou classe, proceda
+  da seguinte forma:
+
+  . na classe (ou estrutura) crie os seguintes metodos:
+	.	int				Compare( sua_classe *, int );
+	.	sua_classe		*Duplicate( void );
+
+  . agora cria a lista de sua_classe, da seguinte forma:
+
+	. class sua_lista : public LBSC_DList<sua_classe>
+	. {
+		// nao eh necessario colocar nada aqui, a nao ser
+		// metodos que existam em sua_lista e nao existam
+		// em LBSC_DList nem em C_List
+	. };
+
+  . para usar a lista, proceda da seguinte forma:
+		.
+		.
+		.
+		sua_lista	sua_variavel;
+		.
+		.
+		.
+		sua_lista.Add...
+		sua_lista.Del...
+		sua_lista.DelAll...
+		.
+		.
+		.
+
+EXEMPLO:
+
+	Aqui está um caso prático:
+
+// a classe:
+class _LBSCLASS LBSC_Base :	public LBSC_Error, 
+							public LBSC_OpInfo,
+							public C_CritSect<11>	// 11 = numero de regioes criticas
+{
+	.
+	.
+	.
+		int				Compare( LBSC_Base *, int );
+		LBSC_Base		*Duplicate( void );
+	.
+	.
+	.
+};
+
+
+// a lista:
+class LBSC_BaseList : public LBSC_DList<LBSC_Base>
+{
+};
+
+
+// uma declaracao:
+LBSC_BaseList	clBaseList;
+
+// um uso:
+LBSC_Base	*pBase = ...
+clBaseList.Add( pBase, TAIL );
+
+**********************************************************************
+

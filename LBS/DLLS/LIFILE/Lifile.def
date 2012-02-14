@@ -1,0 +1,4 @@
+SECTIONS
+	.shsect READ WRITE SHARED
+
+

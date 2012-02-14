@@ -1,0 +1,84 @@
+
+Regiões Críticas para a Classe Session
+--------------------------------------
+
+
+CRITSECT0
+---------
+Atributo		Métodos onde aparece
+--------------------------------------------
+lbscblBaseList		ExportBaseFormat, OpenBase, 
+					CloseBase, DeleteBase, ReorganizeBase
+
+
+CRITSECT1
+---------
+Atributo		Métodos onde aparece
+--------------------------------------------
+plbscuUser			~LBSC_Session, Init, Login, Logout
+plbsctTicket		~LBSC_Session, Init, Login, Logout
+
+
+CRITSECT2
+---------
+Atributo		Métodos onde aparece
+--------------------------------------------
+bSLogin				Init, SLogin
+bIsLogged			Init, Login, Logout
+bIsMono				Init, Login, Logout
+
+CRITSECT3
+---------
+Atributo		Métodos onde aparece
+--------------------------------------------
+_clSessList			LBSC_Session, ~LBSC_Session, Login
+					GetFirstSession, GetNextSession, 
+					GetPreviousSession, GetLastSession
+_clLoginList		Login, Logout
+_clLicList			Login, Logout
+pLoginInfo			Init, Login, Logout
+tLicFileCreateTime	Login, Logout, Init, LicTimerProc
+_uLicTimerId		LBSC_Session, ~LBSC_Session
+iNumLic				Login, Logout
+_pclMaintBaseList	SetBaseForMaintenance, OpenBase,
+					GetReservedMaintBases
+
+CRITSECT4	-> regiao critica para proteger um arquivo. Nao trabalha sobre um
+---------	   membro especifico da classe.
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+cfBasesFile
+(arquivo de controle)	
+
+
+CRITSECT5	-> regiao critica para proteger a operacao de criacao
+---------	   de base. Nao trabalha sobre um membro especifico 
+			   da classe.
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+				CreateBase
+
+CRITSECT6	-> regiao critica para proteger a operacao de abertura
+---------	   de base. Nao trabalha sobre um membro especifico 
+			   da classe.
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+				OpenBase
+
+
+CRITSECT7	-> regiao critica para proteger a operacao de verificação
+---------	   de cache de usuários
+
+Atributo		Métodos onde aparece
+--------------------------------------------
+pUserCache		ChangeUserCachePwd
+				FindUserInCache
+				WhatUDBsForUser
+				AddUserToCache
+				DelUserFromCache
+				
+
+

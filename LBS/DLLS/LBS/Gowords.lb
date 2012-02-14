@@ -1,0 +1,27 @@
+; Este arquivo define as gowords de cada campo da base
+; e um tamanho minimo de chaves que devem ser indexadas
+ 
+[MAIN]
+ 
+; ===================================================
+; tamanho minimo de uma chave para ser indexada
+MINKEYSIZE=1
+ 
+; ===================================================
+; campos que contem gowords
+; sintaxe: FIELD1=apelido_do_campo1
+;          FIELD2=apelido_do_campo2
+;          ...
+ 
+; ===================================================
+; definicoes das gowords de cada campo
+; Exemplo:
+;[apelido_do_campo1]
+;GW1=goword1, goword2, goword3
+; 
+;[apelido_do_campo2]
+;GW1=goword1
+;GW2=goword2
+
+
+

@@ -1,0 +1,4 @@
+[ implicit_handle (handle_t _lbsrpc_IfHandle), enable_allocate ]
+interface lbsrpc
+{
+}

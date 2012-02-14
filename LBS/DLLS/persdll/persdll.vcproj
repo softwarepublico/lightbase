@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="persdll"
+	SccProjectName="SAK"
+	SccAuxPath="SAK"
+	SccLocalPath="SAK"
+	SccProvider="SAK">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\..\..\..\lib\debug"
+			IntermediateDirectory="\obj\persdll\debug"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="k:\develop\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;BUILDING_LBS_DLL"
+				RuntimeLibrary="1"
+				StructMemberAlignment="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile="\obj\persdll\debug/persdll.pch"
+				AssemblerListingLocation="\obj\persdll\debug/"
+				ObjectFile="\obj\persdll\debug/"
+				ProgramDataBaseFileName="\obj\persdll\debug/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="odbc32.lib odbccp32.lib crypt.lib"
+				OutputFile="..\..\..\debug\lbstart.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="..\..\..\lib\debug,k:\develop\lib\release"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile=".\..\..\..\lib\debug/lbstart.pdb"
+				SubSystem="2"
+				ImportLibrary=".\..\..\..\lib\debug/lbstart.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\..\..\..\lib\debug/persdll.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copiando arquivos..."
+				CommandLine="call CopyFiles L D &quot;$(OutDir)&quot;\&quot;$(TargetName)&quot;.lib
+call CopyFiles D      D     &quot;$(TargetPath)&quot;
+echo Personalizando a lbstart.dll local...
+call   DosMarcaTipo -mn &quot;$(TargetPath)&quot;
+call person     @&quot;$(TargetPath)&quot;@LBW@LISA@mn.lbw.1.1@dzdnwpknvs
+call ..\..\..\debug\gettype
+echo   ok.
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1046"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\..\..\..\lib\release"
+			IntermediateDirectory="d:\obj\$(ProjectName)\release"
+			ConfigurationType="2"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="k:\develop\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;BUILDING_LBS_DLL"
+				StringPooling="TRUE"
+				RuntimeLibrary="0"
+				StructMemberAlignment="3"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile="\obj\persdll\release/persdll.pch"
+				AssemblerListingLocation="d:\obj\$(ProjectName)\release"
+				ProgramDataBaseFileName="d:\obj\$(ProjectName)\release"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="crypt.lib"
+				OutputFile="..\..\..\release\lbstart.dll"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories="k:\develop\lib\release"
+				IgnoreDefaultLibraryNames="libcimt.lib, libcmtd.lib,msvcrt.lib,libc.lib"
+				ProgramDatabaseFile=".\..\..\..\lib\release/lbstart.pdb"
+				SubSystem="2"
+				ImportLibrary=".\..\..\..\lib\release/lbstart.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\..\..\..\lib\release/persdll.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Copiando arquivos..."
+				CommandLine="call CopyFiles L R &quot;$(OutDir)&quot;\&quot;$(TargetName)&quot;.lib
+call   CopyFiles   D   R    &quot;$(TargetPath)&quot;
+echo Copiando uma lbstart.dll local personalizada...
+copy .\lbstart.dll ..\..\..\release
+echo ok.
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1046"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;hpj;bat;for;f90">
+			<File
+				RelativePath="personcl.c">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;BUILDING_LBS_DLL;$(NoInherit)"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;BUILDING_LBS_DLL;$(NoInherit)"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;fi;fd">
+			<File
+				RelativePath="personcl.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe">
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

@@ -1,0 +1,911 @@
+//
+// Module: FILECL.CPP
+// Description:
+//	File class functions
+//
+// Programmer:	Marcos Sebastian Alsina
+//
+// Last Uptade: 19/12/95 -> Adriano Sergio
+//
+
+// PARA SETAR O NUMERO MAXIMO DE ARQUIVOS PARA WIN32s SEM ALTERAR ESTE CODIGO,
+// BASTA CHAMAR O METODO SetNumFiles32s COM O NUMERO DESEJADO.
+
+
+#ifndef	_FILECL_
+#include	<filecl.h>
+#endif
+#if !defined __DOS_H && !defined _INC_DOS
+#include	<dos.h>
+#endif
+#if !defined __ERRNO_H && !defined _INC_ERRNO
+#include	<errno.h>
+#endif
+#if !defined(__FCNTL_H) && !defined _INC_FCNTL
+#include	<fcntl.h>
+#endif
+#if !defined(__STAT_H) && !defined _INC_STAT
+#include	<sys/stat.h>
+#endif
+#if !defined(__LOCKING_H) && !defined _INC_LOCKING
+#include	<sys/locking.h>
+#endif
+#ifndef _CRIPTO_
+#include	<cripto.h>
+#endif
+#if !defined __STRING_H && !defined _INC_STRING
+#include	<string.h>
+#endif
+#ifndef	_DEFMACRO_H_
+#include	<defmacro.h>
+#endif
+#ifndef	_INC_STDIO
+#include	<stdio.h>
+#endif
+
+
+extern int	errno;
+
+#define	MAXOPENFILES	500	// numero maximo de arquivos abertos para sistemas operacionais decentes
+#define	NUMOPENFILES32s	5	// numero maximo de arquivos abertos para sistemas Win32s
+
+int	Mode( const char *szMode );
+
+static	C_File	*cfFiles[ MAXOPENFILES ];
+static	int	iNumXDat = 0;
+
+// numero de arquivos abertos no momento
+static	int	iNumOpenFiles = 0;
+
+// numero maximo de arquivos abertos simultaneamente
+static	int	iMaxOpenFiles = C_File::CalcMaxOpenFiles();
+
+// arquivo de reserva, para garantir um descritor que sera' usado em casos emergenciais
+static	C_File	xFile( "c:\\x.dat" );
+
+///extern	void	Printf( char *, ... );
+
+
+LockList	C_File::LockTable[ NUMLIST ]; 
+
+/*************/
+int	
+C_File::ListIn()
+{
+	if( this == &xFile ){
+		// xFile nao entra no vetor de arquivos
+		return( OK );
+	}
+	for( int i = 0; i < MAXOPENFILES; i++ ){
+		if( cfFiles[ i ] == NULL ){
+			cfFiles[ i ] = this;
+			return( OK );
+		}
+	}
+	return( !OK );
+}
+
+/*************/
+int	
+C_File::ListOut()
+{
+	for( int i = 0; i < MAXOPENFILES; i++ ){
+		if( cfFiles[ i ] == this ){
+			cfFiles[ i ] = NULL;
+			return( OK );
+		}
+	}
+	return( !OK );
+}
+
+
+/*************/
+int	
+C_File::CloseSomeFile()
+{
+	DWORD	dwMin = (DWORD) -1;
+	int	iPos = -1;
+
+	for( int i = 0; i < MAXOPENFILES; i++ ){
+		if( cfFiles[ i ] && 
+		    cfFiles[ i ]->bReOpen == FALSE &&
+		    cfFiles[ i ]->dwLastUse < dwMin && 
+		    cfFiles[ i ]->iFile >= 0 &&
+		    cfFiles[ i ]->lNumLocks <= 0 ){
+			dwMin = cfFiles[ i ]->dwLastUse;
+			iPos = i;
+		}
+	}
+	if( iPos != -1 ){
+		return cfFiles[ iPos ]->PseudoClose();
+	}
+	return( !OK );
+}
+
+
+/*************/
+int	
+C_File::ReOpen( void )
+{
+///	if( this == &xFile ){
+///		Printf( "C_File: Vou (re) abrir o xFile****************************" );
+///	}
+	if( Open( szFileName, szMode, iShFlag ) == OK ){
+		bReOpen = FALSE;
+		return Seek( lCurPos, SEEK_SET );
+	}
+	return( !OK );
+}
+
+
+/***
+	Read bytes from a file to a buffer.
+	Parameters:
+		- pvBuf: User buffer. Contains the result of a read.
+		- tsSize: Size of iten to read
+		- tsNumItens: Number of itens to read
+	Return:
+		- The number of itens read (not the bytes). In case
+		of error: E_NOTOPEN or E_BUFFNULL or EOF.
+***/
+size_t
+C_File::Read( void FAR *pvBuf, size_t tsSize, size_t tsNumItens )
+{
+	int iFlag = FALSE;
+	if( !pvBuf ){
+		return( E_BUFFNULL );
+	}
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){
+			xFile.PseudoClose();
+			ReOpen();
+			iFlag = TRUE;
+		}
+	}
+	for( size_t i = 0; i < tsNumItens; i++ ){
+		if( read( iFile, ( char *) pvBuf + tsSize * i, tsSize ) < tsSize ){
+			break;
+		}
+	}
+	dwLastUse = GetTickCount();
+	if( cCriptoOn ){
+		Descripto( pvBuf, szKey, tsSize * tsNumItens );
+	}
+	if( i < tsNumItens ){
+		i = EOF;
+	}
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( i );
+}
+
+/***
+	Le uma linha de um arquivo texto. Para de ler quando acha
+	um '\n' ou quando le szMaxlen caracteres. O '\n' nao eh
+	deixado dentro do buffer. Em seu lugar, este metodo coloca
+	um '\0'. Retorna o numero de caracteres lidos, incluindo o
+	'\n'.
+***/
+size_t
+C_File::ReadLine( char FAR *szBuf, size_t stMaxLen )
+{
+	int iFlag = FALSE;
+	if( !szBuf ){
+		return( E_BUFFNULL );
+	}
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			xFile.PseudoClose();
+			ReOpen();
+			iFlag = TRUE;
+		}
+	}
+	for( size_t i = 0; i < stMaxLen; i++ ){
+		if( read( iFile, ( char *) szBuf + i, sizeof( char ) ) < sizeof( char ) ){
+			if( i == 0 ){
+				if( iFlag ){
+					PseudoClose();
+					xFile.ReOpen();
+				}
+				return( EOF );
+			}
+			break;
+		}
+		if( ((char*)szBuf)[ i ] == '\n' ){
+			break;
+		}
+	}
+	dwLastUse = GetTickCount();
+	((char*)szBuf)[ i ] = '\0';
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( i );
+}
+
+
+/***
+	Grava uma linha em um arquivo texto. No final da linha, coloca um
+	'\n'. Retorna OK ou !OK.
+***/
+size_t
+C_File::WriteLine( char FAR *szBuf )
+{
+	int iFlag = FALSE;
+	if( !szBuf ){
+		return( E_BUFFNULL );
+	}
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			xFile.PseudoClose();
+			ReOpen();
+			iFlag = TRUE;
+		}
+	}
+	char cAuxCripto = cCriptoOn;
+	cCriptoOn = FALSE;
+	if( Write( szBuf, strlen( szBuf ) ) != OK ){
+		if( iFlag ){
+			PseudoClose();
+			xFile.ReOpen();
+		}
+		return( !OK );
+	}
+	char szTmp[] = "\n";
+	if( Write( szTmp, strlen( szTmp ) ) != OK ){
+		if( iFlag ){
+			PseudoClose();
+			xFile.ReOpen();
+		}
+		return( !OK );
+	}
+	cCriptoOn = cAuxCripto;
+	dwLastUse = GetTickCount();
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( OK );
+}
+
+
+/***
+	Write bytes in a file from a given buffer.
+	Parameters:
+		- pvBuf: User buffer with data to write in file
+		- tsSize: Size of iten to write
+		- tsNumItens: Number of itens to write
+	Return:
+		Number of writtem itens in succes or E_NOTOPEN,
+		E_BUFFNULL or E_WRITE.
+***/
+size_t
+C_File::Write( void FAR *pvBuf, size_t tsSize, size_t tsNumItens )
+{
+	int iFlag = FALSE;
+	if( !pvBuf ){
+		return( E_BUFFNULL );
+	}
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			xFile.PseudoClose();
+			ReOpen();		   
+			iFlag = TRUE;
+		}
+	}
+	LockStruct ls( this, CurPos(), (tsSize * tsNumItens) );
+	if( IsLocked( &ls ) ){
+		if( iFlag ){
+			PseudoClose();
+			xFile.ReOpen();
+		}
+		return E_WRITE;
+	}
+
+	if( cCriptoOn ){
+		Cripto( pvBuf, szKey, tsSize );
+	}
+	for( size_t i = 0; i < tsNumItens; i++ ){
+		if( write( iFile, pvBuf, (unsigned) tsSize ) < tsSize ){
+			break;
+		}
+	}
+	dwLastUse = GetTickCount();
+	if( cCriptoOn ){
+		Descripto( pvBuf, szKey, tsSize );
+	}
+	if( i < tsNumItens ){
+		i = E_WRITE;
+	}
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( i );
+}
+
+
+
+
+/***
+	Puts the file pointer in the given place.
+	Parameters:
+		- lOffset: number of bytes to jump from.
+		- iWhence: SEEK_SET, SEEK_CUR or SEEK_END.
+        Return: E_NOTOPEN, E_SEEK or OK.
+***/
+int
+C_File::Seek( long lOffset, int iWhence )
+{
+	if( iFile == -1 ){
+		if( !bReOpen ){
+			return( E_NOTOPEN );
+		}
+		switch( iWhence ){
+		case SEEK_SET:
+			lCurPos = lOffset;
+			break;
+		case SEEK_CUR:
+			lCurPos += lOffset;
+			break;
+		case SEEK_END:
+			Seek( FileSize() + lOffset, SEEK_SET );
+			break;
+		default:
+			return( E_SEEK );
+		}
+	} else {
+		if( lseek( iFile, lOffset, iWhence ) == -1L ){
+			return( E_SEEK );
+		}
+	}
+	dwLastUse = GetTickCount();
+	return( OK );
+}
+
+
+
+
+/***
+	Write bytes at the end of a file from a given buffer.
+	Parameters:
+		- pvBuf: User buffer with data to append to.
+		- tsSize: Size of iten to write
+		- tsNumItens: Number of itens to write
+	Return:
+		Number of writtem itens in succes or E_NOTOPEN,
+		E_BUFFNULL or E_WRITE.
+***/
+size_t
+C_File::Append( void *pvBuf, size_t tsSize, size_t tsNumItens )
+{
+	if( !pvBuf ){
+		return( E_BUFFNULL );
+	}
+	if( Seek( 0, SEEK_END ) != OK ){
+		return( E_SEEK );
+	}
+	return Write( pvBuf, tsSize, tsNumItens );
+}
+
+
+
+/***
+	Open a file. If the file exists it is openned "rb+" else
+	it is openned "wb+".
+	Parameters:
+		- szNameFile: Name of file (just the name or full path)
+		- szMode
+		- iShFlag
+	Return:
+		E_NOTOPEN or OK (errno e' setado)
+***/
+int
+C_File::Open( const char *szNameFile, const char *szModePar, int iShFlagPar )
+{
+	if( iFile != -1 ){
+		return( !OK );
+	}
+	do{
+		int iMode;
+		if( iNumOpenFiles >= iMaxOpenFiles ){
+			// forcar um erro para fechar outro arquivo e
+			// tornar possivel a abertura deste
+			iFile = -1;
+			errno = EMFILE;
+		} else {
+			if( szModePar != NULL ){
+				iMode = Mode( szModePar );
+				if( iMode & O_CREAT ){
+					iFile = sopen( szNameFile, iMode, iShFlagPar, S_IREAD | S_IWRITE );
+				} else {
+					iFile = sopen( szNameFile, iMode, iShFlagPar );
+				}
+			} else {
+				if( Exist( szNameFile ) ){
+					iFile = sopen( szNameFile, O_BINARY | O_RDWR, iShFlagPar );
+				} else {
+					iFile = sopen( szNameFile, O_BINARY | O_RDWR | O_CREAT, iShFlagPar, S_IREAD | S_IWRITE );
+				}
+			}
+		}
+		if( iFile == -1 ){
+			if( errno == EEXIST && (iMode & O_EXCL) ){
+				// ************************************************************
+				// ATENCAO:
+				// ************************************************************
+				// nao tentar fechar outro arquivo para re-abrir este se 
+				// errno == EEXIST && (iMode & O_EXCL)
+				// ************************************************************
+				iFile = -1;
+				return( !OK );
+			}
+			if( errno != EMFILE ){
+				iFile = -1;
+				return( !OK );
+			}
+			if( CloseSomeFile() != OK ){
+				iFile = -1;
+				return( !OK );
+			}
+		}
+	} while ( iFile == -1 );
+	strcpy( szFileName, szNameFile ? szNameFile : "" );
+	strcpy( szMode, szModePar ? szModePar : "" );
+	iShFlag = iShFlagPar;
+	if( this == &xFile ){
+		Seek( 0, SEEK_SET );
+		char	szCaca[ 50 ];
+		sprintf( szCaca, "%d", ++iNumXDat );
+		Write( szCaca, strlen( szCaca ) );
+		Seek( 0, SEEK_SET );
+		Lock( strlen( szCaca ) );
+///		Printf( "C_File: Abri o xFile****************************" );
+	}
+	Hash();
+	iNumOpenFiles++;
+///	Printf( "C_File: Abri o arquivo <%d> (handle = <%d>)", iNumOpenFiles, iFile );
+	return( OK );
+}
+
+/***
+	Hash function
+***/
+int
+C_File::Hash()
+{
+	iLine = 0;
+	
+	for( char *c = szFileName; *c; c++ ){
+		iLine = ( ( iLine += *c ) % NUMLIST );
+	}
+	return iLine;
+}
+
+
+/***
+	Check if a file exists.
+	Parameters:
+		- szNameFile: The name of file (just the name or full path)
+	Return:
+		TRUE or FALSE
+***/
+BOOL
+C_File::Exist( const char *szFileName )
+{
+	HFILE		hFile;
+	OFSTRUCT	sOpenBuff;
+
+	hFile = OpenFile( szFileName, (OFSTRUCT FAR*) &sOpenBuff, OF_EXIST | OF_SHARE_DENY_NONE );
+	if( hFile == HFILE_ERROR ){
+		return( FALSE );
+	}
+	return( TRUE );
+}
+
+
+
+
+/***
+	Closes a file.
+	Parameters:
+		- None
+	Return:
+		- OK or E_CLOSE
+***/
+int
+C_File::Close()
+{
+	LockList &l = LockTable[ iLine ];
+	for( int i = 0; i < l.NumElem(); ){
+		LockStruct *lsAux = l [ i ];
+		if( lsAux->pcfFile == this ){
+			l.Del();
+		} else {
+			i++;
+		}
+	}
+	if( iFile != -1 ){
+		int i = close( iFile );
+		int iCloseFile = iFile;
+		iFile = -1;
+		if( i == 0 ){
+///			Printf( "C_File: Fechei o arquivo <%d> (handle = <%d>)", iNumOpenFiles, iCloseFile );
+			--iNumOpenFiles;
+		}
+		return( i == 0 ? OK : E_CLOSE );
+	}
+	return( OK );
+}
+
+
+
+
+
+/***
+***/
+static int
+Mode( const char *szMode )
+{
+	int iMode = O_RDWR | O_BINARY | O_CREAT;
+
+	if( strcmp( szMode, "rb" ) == 0 )
+		iMode = O_RDONLY | O_BINARY;
+	else if( strcmp( szMode, "rt" ) == 0 )
+		iMode = O_RDONLY | O_TEXT;
+	else if( strcmp( szMode, "rb+" ) == 0 )
+		iMode = O_RDWR | O_BINARY;
+	else if( strcmp( szMode, "rt+" ) == 0 )
+		iMode = O_RDWR | O_TEXT;
+	else if( strcmp( szMode, "wb+" ) == 0 )
+		iMode = O_RDWR | O_BINARY | O_CREAT;
+	else if( strcmp( szMode, "wt+" ) == 0 )
+		iMode = O_RDWR | O_TEXT | O_CREAT;
+
+	if( strstr( szMode, "++" ) != NULL ){
+		iMode |= O_EXCL;
+	}
+	return( iMode );
+}
+
+
+
+/***
+***/
+LockStruct *
+C_File::GetLock( LockStruct *ls )
+{
+	LockList &l = LockTable[ iLine ];
+	for( int i = 0; i < l.NumElem(); i++ ){
+		LockStruct *lsAux = l [ i ];
+		if( lsAux->pcfFile == ls->pcfFile && lsAux->iPos == ls->iPos && 
+			lsAux->iSize == ls->iSize ){
+			return lsAux;
+		}
+	}
+	return NULL;
+}
+
+
+
+/***
+***/
+int
+C_File::DelLock( LockStruct *ls )
+{
+	LockStruct *lsAux = GetLock( ls );
+	if( lsAux ){
+		if( --lsAux->iCount <= 0 ){
+			LockTable [ iLine ].Del();
+		}
+		return( OK );
+	} 
+	return( !OK );
+}
+
+
+
+/***
+***/
+int
+C_File::AddLock( LockStruct *ls )
+{
+	LockStruct *lsAux = GetLock( ls );
+	if( lsAux ){
+		lsAux->iCount++;
+		return( OK );
+	} else {
+		if( !IsLocked( ls ) ){
+			ls->iCount++;
+			if( LockTable [ iLine ].Add( ls, TAIL ) == OK ){
+				return( OK );
+			}
+		}
+	}
+	return( !OK );
+}
+
+
+
+
+/***
+	Metodo Lock
+	Trava o registro
+
+	Parameters:
+		- pcfControlFile
+
+	Return:
+		LBS_OK se conseguir travar ou erro.
+
+	Comments:
+
+***/
+int
+C_File::Lock( long lSize )
+{
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			return( E_NOTOPEN );
+		}
+	}
+
+	LockStruct *ls = new LockStruct( this, CurPos(), lSize );
+	if( ls ){
+		if( AddLock( ls ) == OK ){
+			return( OK );
+		}
+		delete ls;
+	}
+	return( !OK );
+
+/*	if( locking( GetHandle(), LK_NBLCK, lSize ) == 0 ){
+		dwLastUse = GetTickCount();
+		++lNumLocks;
+		return( OK );
+	}
+	return( !OK );
+*/
+
+}
+
+
+
+/***
+	Metodo Release
+	Libera um registro previamente travado
+
+	Parameters:
+		- pcfControlFile
+
+	Return:
+		LBS_OK se conseguir liberar ou erro.
+
+	Comments:
+
+***/
+int
+C_File::Release( long lSize )
+{
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			return( E_NOTOPEN );
+		}
+	}
+	LockStruct ls( this, CurPos(), lSize );
+	return( DelLock( &ls ) );
+
+/*	if( locking( GetHandle(), LK_UNLCK, lSize ) == 0 ){
+		dwLastUse = GetTickCount();
+		--lNumLocks;
+		return( OK );
+	}
+	return( !OK );
+*/
+
+}
+
+
+void
+C_File::TurnOnCripto( char *szKey )
+{
+	memset( C_File::szKey, 0, MAXCRIPTOKEY );
+	strncpy( C_File::szKey, szKey, MAXCRIPTOKEY );
+	cCriptoOn = 1;
+}
+
+void
+C_File::TurnOffCripto( void )
+{
+	cCriptoOn = 0;
+}
+
+
+
+long
+C_File::FileSize()
+{
+	int iFlag = FALSE;
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			xFile.PseudoClose();
+			ReOpen();
+			iFlag = TRUE;
+		}
+	}
+	long lCurPos = CurPos();
+	Seek( 0, SEEK_END );
+	long lSize = CurPos();
+	Seek( lCurPos, SEEK_SET );
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( lSize );
+}
+
+int
+C_File::PseudoClose( void )
+{
+///	if( this == &xFile ){
+///		Printf( "C_File: Estou (pseudo) fechando o xFile****************************" );
+///	}
+	lCurPos = CurPos();
+	Close();
+	bReOpen = TRUE;
+	return( OK );
+}
+
+
+
+long	
+C_File::CurPos()
+{ 
+	int iFlag = FALSE;
+	if( iFile == -1 ){
+		if( ReOpen() != OK ){		   
+			xFile.PseudoClose();
+			ReOpen();
+			iFlag = TRUE;
+		}
+	}
+	long lRet = lseek( iFile, 0, SEEK_CUR );
+	if( iFlag ){
+		PseudoClose();
+		xFile.ReOpen();
+	}
+	return( lRet );
+}
+
+
+/***
+	Retorna TRUE se existir alguma instancia de C_File (que nao esta)
+	com lock na regiao definida pelo parametro ls.
+
+	Se retornar FALSE, e' porque nao ha' nenhuma outra instancia de C_File
+	travando o arquivo.
+
+	Nao checa se a mesma instancia esta' travando o arquivo.
+***/
+BOOL 
+C_File::IsLocked( LockStruct *ls )
+{
+	LockList &l = LockTable [ iLine ];
+	for( int i = 0; i< l.NumElem(); i++ ){
+		LockStruct *lsAux = l[ i ];
+		if( lsAux->pcfFile != ls->pcfFile ){				 // handles diferentes
+			if( strcmp( lsAux->pcfFile->szFileName, ls->pcfFile->szFileName ) == 0 ){ // nomes iguais
+				if( ( lsAux->iPos >= ls->iPos && lsAux->iPos <= ls->iPos + ls->iSize ) || // posicoes
+					( ls->iPos >= lsAux->iPos && ls->iPos <= lsAux->iPos + lsAux->iSize ) ){ // sobrepostas
+					return( TRUE );
+				}
+			}
+		}
+	}
+	return( FALSE );
+}
+
+
+
+/***
+	CalcMaxOpenFiles
+	Calcula o numero maximo de arquivos que podem ser abertos simultaneamente.
+	Em Win32s esse numero eh bastante pequeno (+- 15). Como a biblioteca nao podemos
+	usar todos os recursos disponiveis (tem que sobrar para os outros), temos que
+	impor um limite abaixo disso.
+	Em NT e Win95 nao temos esse problema. Ja conseguimos abrir 200 arquivos sem
+	problemas.
+***/
+int
+C_File::CalcMaxOpenFiles()
+{
+	OSVERSIONINFO	osInfo;
+	BOOL		bRet;
+
+	osInfo.dwOSVersionInfoSize = sizeof( osInfo );
+	bRet = GetVersionEx( &osInfo );
+	if( !bRet ){
+		// a funcao GetVersionEx nao funcionou. Vamos assumir o numero maximo
+		// como sendo MAXOPENFILES
+		return( MAXOPENFILES );
+	}
+	switch( osInfo.dwPlatformId ){
+	case 0://VER_PLATFORM_WIN32s: (Win32s)
+		// assumiremos um valor default para 32s. Caso seja necessario,
+		// a aplicacao pode alterar este valor atraves do metodo
+		// SetNumFiles, que so' e' util para Win32s.
+		return( NUMOPENFILES32s );
+
+	case 1://VER_PLATFORM_WIN32_WINDOWS: (Windows 95)
+	case 2://VER_PLATFORM_WIN32_NT: (Windows NT)
+		return( MAXOPENFILES );
+
+	}
+	// versao do sistema nao conhecida. Vamos retornar o valor MAXOPENFILES
+	return( MAXOPENFILES );
+}
+
+
+
+/***
+	static PUBLIC
+
+	Este metodo seta o numero maximo de arquivos que podem ser abertos
+	simultaneamente. So' vale para ambientes 32s. Para NT ou 95, este metodo
+	retorna erro.
+***/
+int
+C_File::SetNumFiles32s( int inf )
+{
+	if( inf <= 0 ){
+		return( !OK );
+	}
+
+	OSVERSIONINFO	osInfo;
+	osInfo.dwOSVersionInfoSize = sizeof( osInfo );
+	if( !GetVersionEx( &osInfo ) ){
+		return( !OK );
+	}
+	if( osInfo.dwPlatformId != 0 ){	// VER_PLATFORM_WIN32s
+		// plataforma nao eh Win32s
+		return( !OK );
+	}
+	iMaxOpenFiles = inf;
+///	Printf( "C_File: Setei o numero de arqs p/ 32s <%d>", iMaxOpenFiles );
+	return( OK );
+}
+
+
+/***
+	static PUBLIC
+	Fecha os arquivos stdin, stdout e stderr
+***/
+int
+C_File::CloseStdFiles()
+{
+	fclose( stdin );
+	fclose( stdout );
+	fclose( stderr );
+///	Printf( "C_File: Fechei os stdfiles" );
+	return( OK );
+}
+
+
+
+/***
+	IsOpen
+***/
+BOOL
+C_File::IsOpen()
+{
+	if( iFile != -1 ){
+		return( TRUE );
+	}
+	if( !bReOpen ){
+		return( FALSE );
+	}
+	return( TRUE );
+}

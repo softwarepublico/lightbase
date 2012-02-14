@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: sort - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP165.tmp" with contents
+[
+/nologo /Zp4 /MTd /W3 /GX /Z7 /Od /I "." /I "k:\develop\include" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /FR"\obj\sort\debug/" /Fp"\obj\sort\debug/sort.pch" /YX /Fo"\obj\sort\debug/" /Fd"\obj\sort\debug/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Sort\Sort.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP165.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\..\\lib\debug\sort.lib"  \obj\sort\debug\Sort.obj "
+<h3>Output Window</h3>
+Compiling...
+Sort.cpp
+Creating library...
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP166.bat" with contents
+[
+@echo off
+call CopyFiles L D \DEVTREE_SHARE\devvlad\lib\debug\sort.lib
+echo ok.
+]
+Creating command line "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP166.bat"
+Copiando arquivos...
+Arquivo(s) nao copiado(s) para o K.
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+
+
+
+<h3>Results</h3>
+sort.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

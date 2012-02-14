@@ -1,0 +1,9 @@
+[General]
+Target=LBS - Win32 Release
+BuildModel=0
+[Directories]
+Target=.\TrueTime
+Intermediates=.\TrueTime
+[Instrumentation]
+Inlines=Yes
+Level=Function

@@ -1,0 +1,102 @@
+Alteracoes nas versoes do LBS:
+
+Versao 1.57:
+-----------
+	- Alteracao para receber corretamente o erro de lock retornado
+	  pelo sistema quando os arquivos estao num servidor Netware
+
+	- Mudanca no esquema de lock do header de LB1 nos metodos 
+	  AppendRecord e UpdateRecord, para possibilitar unlock automatico
+	  em qualquer ponto de retorno (criacao de um objeto automatico
+	  para fazer lock)
+
+	- Correcao no bug da rotina de renomear arquivos para identificar
+	  corretamente o arquivo de gowords (isso estava provocando erro
+	  de incorporacao de bases)
+
+	- Melhoramento no esquema de recuperacao de de erro no sistema
+	  de indice de uma UDB (o LBS nao estava conseguindo
+	  reprocessar automaticamente a UDB)
+
+	- Correcao no metodo ModifyFieldIndexAttrib, para retirar o uso
+	  do indice REFERENCETREE
+
+	- Correcao de bug na ctree: quando havia um erro na abertura
+	  de um indice danificado, havia erro nas outras tentativas 
+	  subsequentes, mesmo considerando que esses indices estavam 
+	  corretos. A recuperacao de erro do primeiro caso nao estava
+	  completa e isso foi corrigido.
+
+	- Correcao de recuperacao de erro de abertura de sistema de
+	  indices na biblioteca LT (erros decorrentes do erro da ctree
+	  nao estavam sendo devidamente tratados)
+
+	- Correção de bug na desindexacao de chave-unica
+
+	- Retirada de leaks:
+		- delecao da lista de stopwords
+		- implementacao de uma funcao Strdup em li.lib
+		  para uso nos modulos LBW/LBS
+
+	- Correção de bug no operador = da classe LBSC_Occurrence
+
+
+Versao 1.63:
+-----------
+	- Retirada de leaks:
+		- criacao de stopwords
+		- chamadas de funcoes strtok substituidas por CStrTok (todas)
+		- alteracao nas chamadas de GetUserName, GetOwnerName, etc.
+		  para retornar const (os metodos que chamavam estes estavam
+		  recebendo copias sem deletar)
+		- GetAliasName e GetDescription, de Field, agora retornam const char*
+		  (antes retornavam char*)
+		- Implementacao de um destrutor para a estrutura TBaseInfo (estava
+		  deixando um atributo alocado)
+		- Implementacao de um metodo LBSC_Session::Delete para TACL_Lists
+		- Metodo GetData de LBSC_OLSort estava com leak na delecao final
+		  do array de elementos (na ultima chamada de delecao)
+
+	- Inclusao de mais uma chave no LBS.INI para ligar/desligar o uso do
+	  newdbg.
+	- Correcao de bug na leitura de uma OL: quando a OL a ser lida do disco
+	  estiver velha em relacao ao sistema de indices, ela deve ser regerada
+	  automaticamente pelo LBS. No Win95 isso nao estava funcionando porque
+	  a data do sistema de indice nao estava sendo atualizada (no NT funciona).
+	- Retorno do fonte CachBase.cpp, que havia misteriosamente sido dubstituido
+	  por um extremamente velho e estava causando bugs no tratamento de cache
+	  do servidor. Agora esta' legal.
+	- Implantacao do uso do newdbg para deteccao de leaks.
+	- Correcao de bug na incorporacao de bases: as bases novas (com compressao)
+	  apresentam um numero magico (versao) diferente e o metodo de incorporacao
+	  nao estava preparado para esse novo numero.
+	- Alteracoes em LI.LIB e LT.LIB para suporte ao newdbg e retiradas
+	  de leaks nessas bibliotecas.
+
+
+Versao 1.64:
+-----------
+	- Insercao de pontos de LOG em Session, Base, Sort e EntryPoint
+	  (logs apenas com o nome do metodo)
+	- Mudou o .INI do LBS
+	- Mudou o .INI do LIFILE
+
+
+Versao 1.66:
+------------
+	- Insercao do "chupador" html e modificacao do algoritmo
+	  de indexacao de url para:
+	  - pegar o arquivo a partir do dirbase, mais diretorios
+	    da url, ou
+	  - se o arquivo nao existir nesse local, pega-lo no dirbase,
+	    sem diretorios
+	  - se dirbase nao existir, utilizar o chupador
+
+	- Geracao de log com o sistema novo (com dois processos)
+	- Retirada de chamadas em loop da funcao GetNumberOfFields()
+	- Retirada de bug na gravacao de campos com chaves que excediam
+	  o tamanho maximo de uma chave no sistema de indices:
+	  campos com chave-unica, por exemplo, estavam provocando GPF
+	  na copia do conteudo do campo para strings internas, alocadas
+	  com MAXKEYSIZE.
+

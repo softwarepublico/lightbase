@@ -1,0 +1,9 @@
+$(projectdir)/Compress.cpp 40cc4 cfa 426e5904 2.0
+$(projectdir)/Compress.h 13231 3b2 3c1e20b6 2.2
+$(projectdir)/Defcompr.h f5f9 34f 35216274 2.0
+$(projectdir)/compress.bak 92e27 20d6 36dd7444 2.0
+$(projectdir)/compress.dsp 625a9 145e 3db55058 2.4
+$(projectdir)/compress.dsw 761c 21b 3577176c 1.1
+$(projectdir)/compress.mak 9cda5 227f 35216274 2.1
+$(projectdir)/compress.mdp d575d 8c00 35216276 2.1
+$(projectdir)/compress.vtp 12f6 3b 35216278 2.0

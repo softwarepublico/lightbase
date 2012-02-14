@@ -1,0 +1,40 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Comparator - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP19AD.tmp" with contents
+[
+/nologo /Zp4 /MT /W3 /O2 /I "." /I "k:\develop\include" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Fp"\obj\comparator\release/Comparator.pch" /YX /Fo"\obj\comparator\release/" /Fd"\obj\comparator\release/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\LIBS\Comparator\Comparator.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP19AD.tmp" 
+Creating command line "link.exe -lib /nologo /out:"..\..\..\lib\release\Comparator.lib"  \obj\comparator\release\Comparator.obj "
+<h3>Output Window</h3>
+Compiling...
+Comparator.cpp
+Creating library...
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP19AE.bat" with contents
+[
+@echo off
+call CopyFiles L R \DEVTREE_SHARE\devvlad\lib\release\Comparator.lib
+echo ok.
+]
+Creating command line "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP19AE.bat"
+Copiando arquivos...
+Copiando \DEVTREE_SHARE\devvlad\lib\release\Comparator.lib para k:\develop\lib\Release...
+        1 arquivo(s) copiado(s).
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+
+
+
+<h3>Results</h3>
+Comparator.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

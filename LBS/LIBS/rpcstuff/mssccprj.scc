@@ -1,0 +1,21 @@
+SCC = This is a Source Code Control file
+
+[rpcstuff.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/rpcstuff", BSNBAAAA
+
+[rpcstuff.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/rpcstuff", BSNBAAAA
+
+[rpcstuff.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/rpcstuff", BSNBAAAA
+
+[rpcstuff.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/rpcstuff", BSNBAAAA
+
+[rpcstuff.vcproj]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/LIBS/rpcstuff", BSNBAAAA

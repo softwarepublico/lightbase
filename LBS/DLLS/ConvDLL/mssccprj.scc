@@ -1,0 +1,17 @@
+SCC = This is a Source Code Control file
+
+[ConvDLL.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/ConvDLL", FBMBAAAA
+
+[ConvDLL.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/ConvDLL", FBMBAAAA
+
+[ConvDLL.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/ConvDLL", FBMBAAAA
+
+[ConvDLL.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/ConvDLL", FBMBAAAA

@@ -1,0 +1,25 @@
+SCC = This is a Source Code Control file
+
+[LBS.dsp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA
+
+[LBS.dsw]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA
+
+[LBS.mdp]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA
+
+[LBS.sln]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA
+
+[LBS.vcproj]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA
+
+[LBS.mak]
+SCC_Aux_Path = "K:\devvss"
+SCC_Project_Name = "$/LBS/DLLS/LBS", MCMBAAAA

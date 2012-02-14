@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LBS", "LBS.vcproj", "{4D5DB4DA-80B4-40D3-9314-450D80923E4C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		DebugComLog = DebugComLog
+		Profile = Profile
+		Release = Release
+		ReleaseComLog = ReleaseComLog
+		Test = Test
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Debug.ActiveCfg = Debug|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Debug.Build.0 = Debug|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.DebugComLog.ActiveCfg = DebugComLog|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.DebugComLog.Build.0 = DebugComLog|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Profile.ActiveCfg = Profile|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Profile.Build.0 = Profile|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Release.ActiveCfg = Release|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Release.Build.0 = Release|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.ReleaseComLog.ActiveCfg = ReleaseComLog|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.ReleaseComLog.Build.0 = ReleaseComLog|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Test.ActiveCfg = Test|Win32
+		{4D5DB4DA-80B4-40D3-9314-450D80923E4C}.Test.Build.0 = Test|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

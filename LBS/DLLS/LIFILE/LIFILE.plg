@@ -1,0 +1,70 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: LIFILE - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6E6.tmp" with contents
+[
+/nologo /Zp4 /MT /W3 /O2 /I ".\include" /I "k:\develop\include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_CFILE_WINDOWS_FILES_" /D "BUILDING_LIFILE_DLL" /Fp"/obj/lifile/release/LIFILE.pch" /YX /Fo"/obj/lifile/release/" /Fd"/obj/lifile/release/" /FD /c 
+"D:\DEVTREE_SHARE\devvlad\Lbs\Dlls\LIFILE\SOURCE\WDFILECL.CPP"
+]
+Creating command line "cl.exe @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6E6.tmp" 
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6E7.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib li.lib crypt.lib lbstart.lib /nologo /subsystem:windows /dll /incremental:no /pdb:"..\..\..\lib\release/LIFILE.pdb" /machine:I386 /nodefaultlib:"libcmtd.lib" /def:".\Lifile.def" /out:"..\..\..\release\LIFILE.dll" /implib:"..\..\..\lib\release/LIFILE.lib" /libpath:"k:\develop\lib\release" 
+\obj\lifile\release\DYNFILE.OBJ
+\obj\lifile\release\LIFDLL.OBJ
+\obj\lifile\release\logcl.obj
+\obj\lifile\release\OLDDYNF.OBJ
+\obj\lifile\release\OLDRECF.OBJ
+\obj\lifile\release\RECFILCL.OBJ
+\obj\lifile\release\WDFILECL.OBJ
+\obj\lifile\release\LIFILE.res
+]
+Creating command line "link.exe @C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6E7.tmp"
+<h3>Output Window</h3>
+Compiling...
+WDFILECL.CPP
+Linking...
+   Creating library ..\..\..\lib\release/LIFILE.lib and object ..\..\..\lib\release/LIFILE.exp
+Creating temporary file "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6EB.bat" with contents
+[
+@echo off
+call CopyFiles I R .\Lang\Port\*.Ini Lang\Port
+call       CopyFiles I R   .\Lang\Engl\*.Ini Lang\Engl
+call CopyFiles L R       .\..\..\..\lib\release\LIFILE.lib
+call CopyFiles D R  \DEVTREE_SHARE\devvlad\release\LIFILE.dll
+echo ok.
+]
+Creating command line "C:\DOCUME~1\VLADIM~1.HER\CONFIG~1\Temp\RSP6EB.bat"
+Copiando arquivos...
+Copiando .\Lang\Port\*.Ini para k:\develop\Release\Lang\Port...
+.\Lang\Port\LBFILE.INI
+        1 arquivo(s) copiado(s).
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+Copiando .\Lang\Engl\*.Ini para k:\develop\Release\Lang\Engl...
+.\Lang\Engl\Lbfile.ini
+        1 arquivo(s) copiado(s).
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+Copiando .\..\..\..\lib\release\LIFILE.lib para k:\develop\lib\Release...
+        1 arquivo(s) copiado(s).
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+Copiando \DEVTREE_SHARE\devvlad\release\LIFILE.dll para k:\develop\Release...
+        1 arquivo(s) copiado(s).
+'showtime' n∆o Ç reconhecido como um comando interno
+ou externo, um programa oper†vel ou um arquivo em lotes.
+ok.
+
+
+
+<h3>Results</h3>
+LIFILE.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
